@@ -22,26 +22,31 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        //hide action bar for splash screen
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+        //create new handler for SplashActivity
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                //check for any logged in user and start the MainActivity class directly
                 if(gAccount!=null||isLoggedIn) {
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 }
+                //else start the SignInActivity class for user to login
                 else
                 {
                     startActivity(new Intent(SplashActivity.this,SignInActivity.class));
                 }
             }
-        },3000);
+        },3000);//open the new Activity after a delay of 3s
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        //search for any already logged in user
         gAccount= GoogleSignIn.getLastSignedInAccount(this);
         accessToken = AccessToken.getCurrentAccessToken();
         isLoggedIn = accessToken != null && !accessToken.isExpired();

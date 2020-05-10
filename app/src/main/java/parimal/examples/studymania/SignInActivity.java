@@ -37,22 +37,27 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        //inflate the fb signin anf gmail signin buttons.
         g_sign_in_button=(SignInButton)findViewById(R.id.g_sign_in_button);
         fb_login_button=(LoginButton)findViewById(R.id.fb_login_button);
 
 
+        //method call for fb and google signins
         signInWithGoogle();
         signInWithFb();
     }
 
     public void signInWithGoogle()
     {
+        //create a new GSO with email request.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
 
+        //create a new google client for google sign in
         mGoogleSignInClient= GoogleSignIn.getClient(this,gso);
 
+        //set on click listener on google signin button
         g_sign_in_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +68,7 @@ public class SignInActivity extends AppCompatActivity {
 
     public void signIn()
     {
+        //open a new intent and retrieve the results of google sign in
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -70,16 +76,20 @@ public class SignInActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //get the google signed in user details from this method
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
+        //transfer the results of fb sign in to callback manager
         else
         {
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
+//
 
+    //get the google signed in user's account details and move to the MainActivity after login
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
@@ -94,12 +104,15 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
+    //method for fb signin
     public void signInWithFb()
     {
+        //create a callback manager and register it to receive user account details.
         callbackManager=CallbackManager.Factory.create();
         fb_login_button.setReadPermissions(Arrays.asList("email","public_profile"));
         fb_login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
+            //start the MainActivity after login
             public void onSuccess(LoginResult loginResult) {
                 startActivity(new Intent(SignInActivity.this,MainActivity.class));
             }
@@ -118,6 +131,7 @@ public class SignInActivity extends AppCompatActivity {
 
 
 
+    //close the application if back button is pressed
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);

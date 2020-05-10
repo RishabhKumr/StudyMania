@@ -2,4 +2,11 @@
     <string name="app_name">StudyMania</string>
     <string name="facebook_app_id">224325922200067</string>
     <string name="fb_login_protocol_scheme">fb224325922200067</string>
+    <string-array name="subject_list">
+        <item>English</item>
+        <item>Maths</item>
+        <item>Science</item>
+        <item>Computer</item>
+        <item>Social Science</item>
+    </string-array>
 </resources>
