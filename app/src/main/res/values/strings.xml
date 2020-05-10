@@ -9,4 +9,10 @@
         <item>Computer</item>
         <item>Social Science</item>
     </string-array>
+    <string-array name="level_list">
+        <item>Random</item>
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
 </resources>
