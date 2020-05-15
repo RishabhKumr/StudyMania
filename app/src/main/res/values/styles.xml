@@ -9,6 +9,13 @@
         <item name="android:windowAnimationStyle">@style/CustomAnim</item>
     </style>
 
+    <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
     <style name="CustomAnim" parent="@android:style/Animation.Activity">
     <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
     <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
@@ -16,5 +23,12 @@
     <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
 
+    <style name="menustyle" parent="Theme.AppCompat.Light">
+        <item name="android:background">@android:color/white</item>
+    </style>
+
+    <style name="MyTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">20sp</item>
+    </style>
 
 </resources>

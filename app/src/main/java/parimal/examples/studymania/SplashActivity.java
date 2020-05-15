@@ -11,11 +11,13 @@ import com.facebook.AccessToken;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SplashActivity extends AppCompatActivity {
-    GoogleSignInAccount gAccount;
     AccessToken accessToken;
     private boolean isLoggedIn;
+    FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 //check for any logged in user and start the MainActivity class directly
-                if(gAccount!=null||isLoggedIn) {
+                if(firebaseUser!=null)//||isLoggedIn)
+                    {
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 }
                 //else start the SignInActivity class for user to login
@@ -46,9 +49,12 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //search for any already logged in user
-        gAccount= GoogleSignIn.getLastSignedInAccount(this);
-        accessToken = AccessToken.getCurrentAccessToken();
-        isLoggedIn = accessToken != null && !accessToken.isExpired();
+
+        //check for firebase email login user
+        firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+
+
+        //accessToken = AccessToken.getCurrentAccessToken();
+        //isLoggedIn = accessToken != null && !accessToken.isExpired();
     }
 }

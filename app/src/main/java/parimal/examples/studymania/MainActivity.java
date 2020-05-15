@@ -10,10 +10,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity  implements SubjectSelectDialogFragment.SubjectSelectListener {
     private Button test_create_button;
     //to get the selected subject
     String subjectselected="";
+    private Button logout_button;
+    GoogleSignInAccount gAccount;
+    FirebaseUser firebaseUser;
+    FirebaseFirestore firebaseFirestore;
+    private Button chat_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +35,15 @@ public class MainActivity extends AppCompatActivity  implements SubjectSelectDia
 
         //button to create test
         test_create_button=(Button)findViewById(R.id.test_create_button);
-        //set onclicklistener on button
+        //button to logout
+        logout_button=(Button)findViewById(R.id.logout_button);
+        //button to chat
+        chat_button=(Button)findViewById(R.id.chat_button);
+        //get reference to firebase user and firestore
+        firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        firebaseFirestore=FirebaseFirestore.getInstance();
+
+        //set onclicklistener on test_create_button
         test_create_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,6 +51,28 @@ public class MainActivity extends AppCompatActivity  implements SubjectSelectDia
                 DialogFragment subjectSelectDialog=new SubjectSelectDialogFragment();
                 subjectSelectDialog.setCancelable(false);
                 subjectSelectDialog.show(getSupportFragmentManager(),"SubjectSelectDialog");
+            }
+        });
+
+        //set onclicklistener on chat button
+        chat_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //move to chatactivity
+                startActivity(new Intent(getApplicationContext(),ChatActivity.class));
+
+            }
+        });
+
+        //button to logout from app
+        logout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(firebaseUser!=null)
+                {
+                    FirebaseAuth.getInstance().signOut();
+                }
+                startActivity(new Intent(MainActivity.this,SignInActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
     }
@@ -56,5 +99,29 @@ public class MainActivity extends AppCompatActivity  implements SubjectSelectDia
     @Override
     public void onNegativeButtonClicked() {
 
+    }
+
+    //add status of current user to firestore
+    private void status(String Status)
+    {
+        HashMap<String,Object> hashMap=new HashMap<>();
+
+        hashMap.put("Status",Status);
+        firebaseFirestore.collection("Users").document(firebaseUser.getUid())
+                .update(hashMap);
+    }
+
+    //set status
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
+    }
+
+    //set status
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("offline");
     }
 }

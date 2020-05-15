@@ -11,7 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WebActivity"></activity>
+        <activity android:name=".ConversationActivity"
+            android:theme="@style/NoActionBarTheme"/>
+        <activity
+            android:name=".ChatActivity"
+            android:theme="@style/NoActionBarTheme" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".WebActivity" />
         <activity android:name=".TestCreateActivity" />
 
         <meta-data
