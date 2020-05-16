@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.net.nsd.NsdManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,6 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
+import Model.Chats;
+
 public class MainActivity extends AppCompatActivity  implements SubjectSelectDialogFragment.SubjectSelectListener {
     private Button test_create_button;
     //to get the selected subject
@@ -26,7 +31,7 @@ public class MainActivity extends AppCompatActivity  implements SubjectSelectDia
     GoogleSignInAccount gAccount;
     FirebaseUser firebaseUser;
     FirebaseFirestore firebaseFirestore;
-    private Button chat_button;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +42,7 @@ public class MainActivity extends AppCompatActivity  implements SubjectSelectDia
         test_create_button=(Button)findViewById(R.id.test_create_button);
         //button to logout
         logout_button=(Button)findViewById(R.id.logout_button);
-        //button to chat
-        chat_button=(Button)findViewById(R.id.chat_button);
+
         //get reference to firebase user and firestore
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         firebaseFirestore=FirebaseFirestore.getInstance();
@@ -54,15 +58,6 @@ public class MainActivity extends AppCompatActivity  implements SubjectSelectDia
             }
         });
 
-        //set onclicklistener on chat button
-        chat_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //move to chatactivity
-                startActivity(new Intent(getApplicationContext(),ChatActivity.class));
-
-            }
-        });
 
         //button to logout from app
         logout_button.setOnClickListener(new View.OnClickListener() {
@@ -123,5 +118,26 @@ public class MainActivity extends AppCompatActivity  implements SubjectSelectDia
     protected void onPause() {
         super.onPause();
         status("offline");
+    }
+
+    //inflate menu for the activity
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+
+    }
+
+    //set listener for selected menu item
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            //start chatactivity if chat button is pressed
+            case R.id.start_Chat:
+                startActivity(new Intent(MainActivity.this, ChatActivity.class));
+        }
+        return true;
     }
 }
