@@ -19,56 +19,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/qn_number_edittext"
-        android:layout_width="90dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:foregroundGravity="center_vertical"
-        android:gravity="center|clip_vertical"
-        android:inputType="number"
-        android:text="3"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/qn_number_textview" />
-
-    <Button
-        android:id="@+id/qn_minus_button"
-        android:layout_width="38dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="34dp"
-        android:text="-"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/qn_number_edittext"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/qn_number_textview" />
-
-    <Button
-        android:id="@+id/qn_plus_button"
-        android:layout_width="38dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="34dp"
-        android:text="+"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/qn_number_edittext"
-        app:layout_constraintTop_toBottomOf="@+id/qn_number_textview" />
-
     <TextView
         android:id="@+id/total_marks_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:text="Select total marks"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/qn_number_edittext" />
+        app:layout_constraintTop_toBottomOf="@+id/totalqns_rg" />
 
     <EditText
         android:id="@+id/total_marks_edittext"
@@ -97,5 +57,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/total_marks_edittext"
         app:layout_constraintVertical_bias="0.0" />
+
+    <RadioGroup
+        android:id="@+id/totalqns_rg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qn_number_textview">
+
+        <RadioButton
+            android:id="@+id/ten_qns_rb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="10" />
+
+        <RadioButton
+            android:id="@+id/twentyfive_qns_rb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="25" />
+
+        <RadioButton
+            android:id="@+id/fifty_qns_rb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="50" />
+
+        <RadioButton
+            android:id="@+id/hundred_qns_rb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="100" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

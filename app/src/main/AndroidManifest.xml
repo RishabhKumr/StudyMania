@@ -17,7 +17,7 @@
             android:name=".ChatActivity"
             android:theme="@style/NoActionBarTheme" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".WebActivity" />
+        <activity android:name=".TestDisplayActivity" />
         <activity android:name=".TestCreateActivity" />
 
         <meta-data
