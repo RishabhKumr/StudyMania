@@ -20,6 +20,7 @@ public class SplashActivity extends AppCompatActivity {
     private boolean isLoggedIn;
     FirebaseUser firebaseUser;
     SharedPreferences sharedPreferences;
+    int introstatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class SplashActivity extends AppCompatActivity {
 
         //get introstatus from sharedpreferences
         sharedPreferences=getSharedPreferences("MyPref",MODE_PRIVATE);
-        final int introstatus=sharedPreferences.getInt("introstatus",0);
+        introstatus=sharedPreferences.getInt("introstatus",0);
 
         //create new handler for SplashActivity
         new Handler().postDelayed(new Runnable() {

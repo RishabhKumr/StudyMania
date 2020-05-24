@@ -23,16 +23,17 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/image_intro2"
         android:layout_marginTop="20dp"
-        android:text="Assignments"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="26sp"
-        android:textAlignment="center"
         android:gravity="center_horizontal"
+        android:text="Assignments"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_intro2" />
 
     <TextView
+        android:id="@+id/Assn_tv"
         android:layout_width="216dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
